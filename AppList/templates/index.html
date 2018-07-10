@@ -1,0 +1,42 @@
+{% extends 'master.html' %}
+
+{% block content %}
+    
+    <h1 class="center-align">Aplicacion de tareas Python</h1>
+
+    <form action="{% url 'crearTarea' %}" method="POST">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="input-field col s6">
+                    <input id="titulo" type="text" class="validate" name="title">
+                    <label for="titulo">Titulo</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <input id="texto" type="text" class="validate" name="text">
+                    <label for="texto">texto</label>
+                  </div>
+
+        <button class="btn waves-effect waves-light" type="submit" name="action">
+            <i class="material-icons right"></i>Crear tarea</button>
+
+        </div>
+    </form>
+
+    
+
+        {% for tarea in tareas %}
+
+
+        <ul class="collection with-header">
+
+        <li class="collection-header"><h4>{{ tarea.title }}</h4></li>
+
+        <li class="collection-item" id="body"><div>{{ tarea.body }}<a href="{% url 'borrarTarea' id=tarea.id %}" class="secondary-content"><i class="material-icons">borrar</i></a></div></li>
+        
+        </ul>
+        {% endfor %}
+
+                  
+
+{% endblock %}
